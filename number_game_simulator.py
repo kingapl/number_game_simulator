@@ -1,4 +1,5 @@
 import tkinter as tk
+from random import randint
 
 
 class NumberGameSimulator(tk.Frame):
@@ -84,27 +85,25 @@ class NumberGameSimulator(tk.Frame):
                 print("Nie można wybrać liczby spoza zakresu.")
 
         print(user_numbers)
-        """
+
+        # draw numbers
         quantity = 0
-        numbers = []
+        drawn_numbers = []
 
         while quantity < 5:
-            try:
-                number = int(input("Wybrano: "))
-                if number <= 0 or number > 30:
-                    print("Nie można wybrać liczby spoza zakresu.")
-                elif number not in numbers:
-                    numbers.append(number)
-                    quantity += 1
-                else:
-                    print("Liczba została już wybrana, podaj inną.")
-            except ValueError:
-                print("Nie wybrano liczby. Podaj liczbę.")
-
-        print(f"\nWybrane liczby: {sorted(numbers)}.") 
-
-        return numbers
-        """
+            drawn_number = randint(1, 30)
+            if drawn_number not in drawn_numbers:
+                drawn_numbers.append(drawn_number)
+                quantity += 1
+            else:
+                continue
+    
+        print(drawn_numbers)
+        self.comp_number1.set(drawn_numbers[0])
+        self.comp_number2.set(drawn_numbers[1])
+        self.comp_number3.set(drawn_numbers[2])
+        self.comp_number4.set(drawn_numbers[3])
+        self.comp_number5.set(drawn_numbers[4])
 
 
 root = tk.Tk()
