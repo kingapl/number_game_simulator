@@ -105,6 +105,27 @@ class NumberGameSimulator(tk.Frame):
         self.comp_number4.set(drawn_numbers[3])
         self.comp_number5.set(drawn_numbers[4])
 
+        # matching numbers
+        matching = 0
+        matching_numbers = []
+
+        for number in user_numbers:
+            for drawn_number in drawn_numbers:
+                if number == drawn_number:
+                    matching += 1
+                    matching_numbers.append(number)
+                else:
+                    continue
+
+        matching_label = tk.Label(self, text=f"Ilość trafień: {matching}")
+        matching_label.grid(row=7, column=2)
+
+        matching_numbers_label = tk.Label(self, text=f"Trafione liczby: {matching_numbers}")
+        matching_numbers_label.grid(row=8, column=2)
+
+        print(matching)
+        print(matching_numbers)
+
 
 root = tk.Tk()
 number_game_simulator = NumberGameSimulator(master=root)
