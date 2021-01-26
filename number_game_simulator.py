@@ -6,24 +6,25 @@ class NumberGameSimulator(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
         self.master = master
-        self.master.geometry("500x500")
+        self.master.geometry("450x500")
         self.master.title("Number Game Simulator")
+        #self.master.configure(bg="#b7ed8e")
         self.pack()
         self.create_widgets()
 
     def create_widgets(self):
-        self.title_label = tk.Label(self, text="Number Game", font="Arial 20 bold", pady=20)
-        self.title_label.grid(row=0, column=2)
+        self.title_label = tk.Label(self, text="Number Game", font="Arial 20 bold", fg="#3e8a04", pady=20)
+        self.title_label.grid(row=0, column=0, columnspan=5)
 
         self.text_label = tk.Label(self, 
             text="Podaj kolejno 5 liczb z zakresu 1-30", font="Arial 12", pady=20)
-        self.text_label.grid(row=1, column=2)
+        self.text_label.grid(row=1, column=0, columnspan=5)
 
         # User numbers entries
         self.user_number1 = tk.StringVar()
         self.number1 = tk.Entry(self, textvariable=self.user_number1, 
                                 width=2, font="Arial 12")
-        self.number1.grid(row=2, column=0, padx=20)
+        self.number1.grid(row=2, column=0)
 
         self.user_number2 = tk.StringVar()
         self.number2 = tk.Entry(self, textvariable=self.user_number2, 
@@ -43,14 +44,14 @@ class NumberGameSimulator(tk.Frame):
         self.user_number5 = tk.StringVar()
         self.number5 = tk.Entry(self, textvariable=self.user_number5, 
                                 width=2, font="Arial 12")
-        self.number5.grid(row=2, column=4, padx=20)
+        self.number5.grid(row=2, column=4)
         # User numbers entries - end
 
         self.play_button = tk.Button(self, text="Zagraj", command=self.play, font="Arial 14", bg="#54ba06", padx=10, pady=10)
-        self.play_button.grid(row=4, column=2, pady=20)
+        self.play_button.grid(row=4, column=0, columnspan=5, pady=20)
 
         self.draw_info = tk.Label(self, text="Losowanie pięciu liczb z zakresu 1-30.\nWylosowane liczby", font="Arial 12", pady=20)
-        self.draw_info.grid(row=5, column=2)
+        self.draw_info.grid(row=5, column=0, columnspan=5)
 
         # Computer numbers entries
         self.comp_number1 = tk.StringVar()
@@ -86,7 +87,7 @@ class NumberGameSimulator(tk.Frame):
         for number in user_numbers:
             if number <= 0 or number > 30:
                 invalid_number = tk.Label(self, text="Nie można wybrać liczby spoza zakresu.")
-                invalid_number.grid(row=3, column=2)
+                invalid_number.grid(row=3, column=0, columnspan=5)
                 print("Nie można wybrać liczby spoza zakresu.")
 
         print(user_numbers)
@@ -123,10 +124,10 @@ class NumberGameSimulator(tk.Frame):
                     continue
 
         matching_label = tk.Label(self, text=f"Ilość trafień: {matching}", font="Arial 12", pady=10)
-        matching_label.grid(row=7, column=2)
+        matching_label.grid(row=7, column=0, columnspan=5)
 
         matching_numbers_label = tk.Label(self, text=f"Trafione liczby: {matching_numbers}", font="Arial 12")
-        matching_numbers_label.grid(row=8, column=2)
+        matching_numbers_label.grid(row=8, column=0, columnspan=5)
 
         print(matching)
         print(matching_numbers)
