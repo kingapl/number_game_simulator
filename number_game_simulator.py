@@ -86,7 +86,7 @@ class NumberGameSimulator(tk.Frame):
 
         for number in user_numbers:
             if number <= 0 or number > 30:
-                invalid_number = tk.Label(self, text="Nie można wybrać liczby spoza zakresu.")
+                invalid_number = tk.Label(self, text="Nie można wybrać liczby spoza zakresu.", fg="#b51818")
                 invalid_number.grid(row=3, column=0, columnspan=5)
                 print("Nie można wybrać liczby spoza zakresu.")
 
