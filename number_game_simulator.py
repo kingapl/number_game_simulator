@@ -87,6 +87,12 @@ class NumberGameSimulator(tk.Frame):
         self.computer_number5.grid(row=6, column=4)
         # Computer numbers entries - end
 
+        self.matching_label = tk.Label(self,text=" ", font="Arial 12", pady=10)
+        self.matching_label.grid(row=7, column=0, columnspan=5)
+
+        self.matching_numbers_label = tk.Label(self, text=" ", font="Arial 12")
+        self.matching_numbers_label.grid(row=8, column=0, columnspan=5)
+
         self.reset_button = tk.Button(self, text="Reset", command=self.reset, 
             font="Arial 14", bg="#54ba06", padx=10, pady=10)
         self.reset_button.grid(row=9, column=0, columnspan=5, pady=20)
@@ -149,13 +155,9 @@ class NumberGameSimulator(tk.Frame):
                     else:
                         continue
 
-            matching_label = tk.Label(self, text=f"Ilość trafień: {matching}", 
-                font="Arial 12", pady=10)
-            matching_label.grid(row=7, column=0, columnspan=5)
+            self.matching_label['text'] = f"Ilość trafień: {matching}"
 
-            matching_numbers_label = tk.Label(self, 
-                text=f"Trafione liczby: {matching_numbers}", font="Arial 12")
-            matching_numbers_label.grid(row=8, column=0, columnspan=5)
+            self.matching_numbers_label['text'] = f"Trafione liczby: {matching_numbers}"
 
 
         try:
