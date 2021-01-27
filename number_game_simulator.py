@@ -88,26 +88,27 @@ class NumberGameSimulator(tk.Frame):
         # Computer numbers entries - end
 
     def play(self):
-        def pick_numbers(self):
-            #try:
-                u_number1 = self.number1.get()
-                u_number2 = self.number2.get()
-                u_number3 = self.number3.get()
-                u_number4 = self.number4.get()
-                u_number5 = self.number5.get()
+        def check_numbers(self):
+            u_number1 = self.number1.get()
+            u_number2 = self.number2.get()
+            u_number3 = self.number3.get()
+            u_number4 = self.number4.get()
+            u_number5 = self.number5.get()
 
-                user_numbers = [int(u_number1), int(u_number2), int(u_number3), 
+            selected_numbers = [int(u_number1), int(u_number2), int(u_number3), 
                                 int(u_number4), int(u_number5)]
+            user_numbers = []
 
-                for number in user_numbers:
-                    if number <= 0 or number > 30:
-                        invalid_number = tk.Label(self, 
-                            text="Nie można wybrać liczby spoza zakresu.", 
-                            fg="#b51818")
-                        invalid_number.grid(row=3, column=0, columnspan=5)
-                        print("Nie można wybrać liczby spoza zakresu.")
+            for number in selected_numbers:
+                if number <= 0 or number > 30:
+                    #self.invalid_number['text'] = "Nie można wybrać liczby spoza zakresu."
+                    break
+                else:
+                    user_numbers.append(number)
 
-                return user_numbers
+            if len(user_numbers) == 5:
+                drawn_numbers = draw_numbers(self)
+                return user_numbers, drawn_numbers
 
 
         def draw_numbers(self):
@@ -153,11 +154,15 @@ class NumberGameSimulator(tk.Frame):
 
 
         try:
-            user_numbers = pick_numbers(self)
-            drawn_numbers = draw_numbers(self)
+            user_numbers, drawn_numbers = check_numbers(self)
+            #drawn_numbers = draw_numbers(self)
             verify_matching_numbers(self, user_numbers, drawn_numbers)
+
         except ValueError:
             self.invalid_number['text'] = "Nieprawidłowa wartość"
+
+        except TypeError:
+            self.invalid_number['text'] = "Liczba spoza zakresu"
 
 
 root = tk.Tk()
