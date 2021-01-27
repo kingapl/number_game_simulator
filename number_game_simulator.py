@@ -87,6 +87,10 @@ class NumberGameSimulator(tk.Frame):
         self.computer_number5.grid(row=6, column=4)
         # Computer numbers entries - end
 
+        self.reset_button = tk.Button(self, text="Reset", command=self.reset, 
+            font="Arial 14", bg="#54ba06", padx=10, pady=10)
+        self.reset_button.grid(row=9, column=0, columnspan=5, pady=20)
+
     def play(self):
         def check_numbers(self):
             u_number1 = self.number1.get()
@@ -164,6 +168,19 @@ class NumberGameSimulator(tk.Frame):
 
         except TypeError:
             self.invalid_number['text'] = "Liczba spoza zakresu lub występuje więcej niż raz."
+
+    def reset(self):
+        self.number1.delete(0, 'end')
+        self.number2.delete(0, 'end')
+        self.number3.delete(0, 'end')
+        self.number4.delete(0, 'end')
+        self.number5.delete(0, 'end')
+
+        self.computer_number1.delete(0, 'end')
+        self.computer_number2.delete(0, 'end')
+        self.computer_number3.delete(0, 'end')
+        self.computer_number4.delete(0, 'end')
+        self.computer_number5.delete(0, 'end')
 
 
 root = tk.Tk()
