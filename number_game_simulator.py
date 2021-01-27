@@ -48,6 +48,9 @@ class NumberGameSimulator(tk.Frame):
         self.number5.grid(row=2, column=4)
         # User numbers entries - end
 
+        self.invalid_number = tk.Label(self, text=" ", fg="#b51818")
+        self.invalid_number.grid(row=3, column=0, columnspan=5)
+
         self.play_button = tk.Button(self, text="Zagraj", command=self.play, 
             font="Arial 14", bg="#54ba06", padx=10, pady=10)
         self.play_button.grid(row=4, column=0, columnspan=5, pady=20)
@@ -86,24 +89,25 @@ class NumberGameSimulator(tk.Frame):
 
     def play(self):
         def pick_numbers(self):
-            u_number1 = self.number1.get()
-            u_number2 = self.number2.get()
-            u_number3 = self.number3.get()
-            u_number4 = self.number4.get()
-            u_number5 = self.number5.get()
+            #try:
+                u_number1 = self.number1.get()
+                u_number2 = self.number2.get()
+                u_number3 = self.number3.get()
+                u_number4 = self.number4.get()
+                u_number5 = self.number5.get()
 
-            user_numbers = [int(u_number1), int(u_number2), int(u_number3), 
-                            int(u_number4), int(u_number5)]
+                user_numbers = [int(u_number1), int(u_number2), int(u_number3), 
+                                int(u_number4), int(u_number5)]
 
-            for number in user_numbers:
-                if number <= 0 or number > 30:
-                    invalid_number = tk.Label(self, 
-                        text="Nie można wybrać liczby spoza zakresu.", 
-                        fg="#b51818")
-                    invalid_number.grid(row=3, column=0, columnspan=5)
-                    print("Nie można wybrać liczby spoza zakresu.")
+                for number in user_numbers:
+                    if number <= 0 or number > 30:
+                        invalid_number = tk.Label(self, 
+                            text="Nie można wybrać liczby spoza zakresu.", 
+                            fg="#b51818")
+                        invalid_number.grid(row=3, column=0, columnspan=5)
+                        print("Nie można wybrać liczby spoza zakresu.")
 
-            return user_numbers
+                return user_numbers
 
 
         def draw_numbers(self):
@@ -148,9 +152,12 @@ class NumberGameSimulator(tk.Frame):
             matching_numbers_label.grid(row=8, column=0, columnspan=5)
 
 
-        user_numbers = pick_numbers(self)
-        drawn_numbers = draw_numbers(self)
-        verify_matching_numbers(self, user_numbers, drawn_numbers)
+        try:
+            user_numbers = pick_numbers(self)
+            drawn_numbers = draw_numbers(self)
+            verify_matching_numbers(self, user_numbers, drawn_numbers)
+        except ValueError:
+            self.invalid_number['text'] = "Nieprawidłowa wartość"
 
 
 root = tk.Tk()
