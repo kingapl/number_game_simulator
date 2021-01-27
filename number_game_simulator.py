@@ -184,6 +184,9 @@ class NumberGameSimulator(tk.Frame):
         self.computer_number4.delete(0, 'end')
         self.computer_number5.delete(0, 'end')
 
+        self.matching_label['text'] = " "
+        self.matching_numbers_label['text'] = " "
+
 
 root = tk.Tk()
 number_game_simulator = NumberGameSimulator(master=root)
