@@ -102,8 +102,9 @@ class NumberGameSimulator(tk.Frame):
             for number in selected_numbers:
                 if number <= 0 or number > 30:
                     #self.invalid_number['text'] = "Nie można wybrać liczby spoza zakresu."
-                    break
-                else:
+                    #break
+                    continue
+                elif number not in user_numbers:
                     user_numbers.append(number)
 
             if len(user_numbers) == 5:
@@ -162,7 +163,7 @@ class NumberGameSimulator(tk.Frame):
             self.invalid_number['text'] = "Nieprawidłowa wartość"
 
         except TypeError:
-            self.invalid_number['text'] = "Liczba spoza zakresu"
+            self.invalid_number['text'] = "Liczba spoza zakresu lub występuje więcej niż raz."
 
 
 root = tk.Tk()
