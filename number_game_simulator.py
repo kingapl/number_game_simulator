@@ -55,47 +55,49 @@ class NumberGameSimulator(tk.Frame):
             font="Arial 14", bg="#54ba06", padx=10, pady=10)
         self.play_button.grid(row=4, column=0, columnspan=5, pady=20)
 
-        self.draw_info = tk.Label(self, 
-            text="Losowanie pięciu liczb z zakresu 1-30.\nWylosowane liczby", 
+        self.draw_info1 = tk.Label(self, text=" ", font="Arial 12")
+        self.draw_info1.grid(row=5, column=0, columnspan=5)
+
+        self.draw_info2 = tk.Label(self, text="Wylosowane liczby:", 
             font="Arial 12", pady=20)
-        self.draw_info.grid(row=5, column=0, columnspan=5)
+        self.draw_info2.grid(row=6, column=0, columnspan=5)
 
         # Computer numbers entries
         self.comp_number1 = tk.StringVar()
         self.computer_number1 = tk.Entry(self, text=self.comp_number1, 
                                         width=2, font="Arial 12")
-        self.computer_number1.grid(row=6, column=0)
+        self.computer_number1.grid(row=7, column=0)
 
         self.comp_number2 = tk.StringVar()
         self.computer_number2 = tk.Entry(self, text=self.comp_number2, 
                                         width=2, font="Arial 12")
-        self.computer_number2.grid(row=6, column=1)
+        self.computer_number2.grid(row=7, column=1)
 
         self.comp_number3 = tk.StringVar()
         self.computer_number3 = tk.Entry(self, text=self.comp_number3, 
                                         width=2, font="Arial 12")
-        self.computer_number3.grid(row=6, column=2)
+        self.computer_number3.grid(row=7, column=2)
 
         self.comp_number4 = tk.StringVar()
         self.computer_number4 = tk.Entry(self, text=self.comp_number4, 
                                         width=2, font="Arial 12")
-        self.computer_number4.grid(row=6, column=3)
+        self.computer_number4.grid(row=7, column=3)
 
         self.comp_number5 = tk.StringVar()
         self.computer_number5 = tk.Entry(self, text=self.comp_number5, 
                                         width=2, font="Arial 12")
-        self.computer_number5.grid(row=6, column=4)
+        self.computer_number5.grid(row=7, column=4)
         # Computer numbers entries - end
 
         self.matching_label = tk.Label(self,text=" ", font="Arial 12", pady=10)
-        self.matching_label.grid(row=7, column=0, columnspan=5)
+        self.matching_label.grid(row=8, column=0, columnspan=5)
 
         self.matching_numbers_label = tk.Label(self, text=" ", font="Arial 12")
-        self.matching_numbers_label.grid(row=8, column=0, columnspan=5)
+        self.matching_numbers_label.grid(row=9, column=0, columnspan=5)
 
         self.reset_button = tk.Button(self, text="Reset", command=self.reset, 
             font="Arial 14", bg="#54ba06", padx=10, pady=10)
-        self.reset_button.grid(row=9, column=0, columnspan=5, pady=20)
+        self.reset_button.grid(row=10, column=0, columnspan=5, pady=20)
 
     def play(self):
         def check_numbers(self):
@@ -133,7 +135,9 @@ class NumberGameSimulator(tk.Frame):
                     quantity += 1
                 else:
                     continue
-    
+
+            self.draw_info1['text']="Losowanie pięciu liczb z zakresu 1-30."
+
             self.comp_number1.set(drawn_numbers[0])
             self.comp_number2.set(drawn_numbers[1])
             self.comp_number3.set(drawn_numbers[2])
@@ -156,7 +160,6 @@ class NumberGameSimulator(tk.Frame):
                         continue
 
             self.matching_label['text'] = f"Ilość trafień: {matching}"
-
             self.matching_numbers_label['text'] = f"Trafione liczby: {matching_numbers}"
 
 
@@ -186,6 +189,7 @@ class NumberGameSimulator(tk.Frame):
 
         self.matching_label['text'] = " "
         self.matching_numbers_label['text'] = " "
+        self.draw_info1['text'] = " "
 
 
 root = tk.Tk()
