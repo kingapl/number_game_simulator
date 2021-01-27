@@ -8,16 +8,17 @@ class NumberGameSimulator(tk.Frame):
         self.master = master
         self.master.geometry("450x500")
         self.master.title("Number Game Simulator")
-        #self.master.configure(bg="#b7ed8e")
         self.pack()
         self.create_widgets()
 
     def create_widgets(self):
-        self.title_label = tk.Label(self, text="Number Game", font="Arial 20 bold", fg="#3e8a04", pady=20)
+        self.title_label = tk.Label(self, text="Number Game", 
+                                font="Arial 20 bold", fg="#3e8a04", pady=20)
         self.title_label.grid(row=0, column=0, columnspan=5)
 
         self.text_label = tk.Label(self, 
-            text="Podaj kolejno 5 liczb z zakresu 1-30", font="Arial 12", pady=20)
+            text="Podaj kolejno 5 liczb z zakresu 1-30", 
+            font="Arial 12", pady=20)
         self.text_label.grid(row=1, column=0, columnspan=5)
 
         # User numbers entries
@@ -47,90 +48,109 @@ class NumberGameSimulator(tk.Frame):
         self.number5.grid(row=2, column=4)
         # User numbers entries - end
 
-        self.play_button = tk.Button(self, text="Zagraj", command=self.play, font="Arial 14", bg="#54ba06", padx=10, pady=10)
+        self.play_button = tk.Button(self, text="Zagraj", command=self.play, 
+            font="Arial 14", bg="#54ba06", padx=10, pady=10)
         self.play_button.grid(row=4, column=0, columnspan=5, pady=20)
 
-        self.draw_info = tk.Label(self, text="Losowanie pięciu liczb z zakresu 1-30.\nWylosowane liczby", font="Arial 12", pady=20)
+        self.draw_info = tk.Label(self, 
+            text="Losowanie pięciu liczb z zakresu 1-30.\nWylosowane liczby", 
+            font="Arial 12", pady=20)
         self.draw_info.grid(row=5, column=0, columnspan=5)
 
         # Computer numbers entries
         self.comp_number1 = tk.StringVar()
-        self.computer_number1 = tk.Entry(self, text=self.comp_number1, width=2, font="Arial 12")
+        self.computer_number1 = tk.Entry(self, text=self.comp_number1, 
+                                        width=2, font="Arial 12")
         self.computer_number1.grid(row=6, column=0)
 
         self.comp_number2 = tk.StringVar()
-        self.computer_number2 = tk.Entry(self, text=self.comp_number2, width=2, font="Arial 12")
+        self.computer_number2 = tk.Entry(self, text=self.comp_number2, 
+                                        width=2, font="Arial 12")
         self.computer_number2.grid(row=6, column=1)
 
         self.comp_number3 = tk.StringVar()
-        self.computer_number3 = tk.Entry(self, text=self.comp_number3, width=2, font="Arial 12")
+        self.computer_number3 = tk.Entry(self, text=self.comp_number3, 
+                                        width=2, font="Arial 12")
         self.computer_number3.grid(row=6, column=2)
 
         self.comp_number4 = tk.StringVar()
-        self.computer_number4 = tk.Entry(self, text=self.comp_number4, width=2, font="Arial 12")
+        self.computer_number4 = tk.Entry(self, text=self.comp_number4, 
+                                        width=2, font="Arial 12")
         self.computer_number4.grid(row=6, column=3)
 
         self.comp_number5 = tk.StringVar()
-        self.computer_number5 = tk.Entry(self, text=self.comp_number5, width=2, font="Arial 12")
+        self.computer_number5 = tk.Entry(self, text=self.comp_number5, 
+                                        width=2, font="Arial 12")
         self.computer_number5.grid(row=6, column=4)
         # Computer numbers entries - end
 
     def play(self):
-        u_number1 = self.number1.get()
-        u_number2 = self.number2.get()
-        u_number3 = self.number3.get()
-        u_number4 = self.number4.get()
-        u_number5 = self.number5.get()
+        def pick_numbers(self):
+            u_number1 = self.number1.get()
+            u_number2 = self.number2.get()
+            u_number3 = self.number3.get()
+            u_number4 = self.number4.get()
+            u_number5 = self.number5.get()
 
-        user_numbers = [int(u_number1), int(u_number2), int(u_number3), int(u_number4), int(u_number5)]
+            user_numbers = [int(u_number1), int(u_number2), int(u_number3), 
+                            int(u_number4), int(u_number5)]
 
-        for number in user_numbers:
-            if number <= 0 or number > 30:
-                invalid_number = tk.Label(self, text="Nie można wybrać liczby spoza zakresu.", fg="#b51818")
-                invalid_number.grid(row=3, column=0, columnspan=5)
-                print("Nie można wybrać liczby spoza zakresu.")
+            for number in user_numbers:
+                if number <= 0 or number > 30:
+                    invalid_number = tk.Label(self, 
+                        text="Nie można wybrać liczby spoza zakresu.", 
+                        fg="#b51818")
+                    invalid_number.grid(row=3, column=0, columnspan=5)
+                    print("Nie można wybrać liczby spoza zakresu.")
 
-        print(user_numbers)
+            return user_numbers
 
-        # draw numbers
-        quantity = 0
-        drawn_numbers = []
 
-        while quantity < 5:
-            drawn_number = randint(1, 30)
-            if drawn_number not in drawn_numbers:
-                drawn_numbers.append(drawn_number)
-                quantity += 1
-            else:
-                continue
-    
-        print(drawn_numbers)
-        self.comp_number1.set(drawn_numbers[0])
-        self.comp_number2.set(drawn_numbers[1])
-        self.comp_number3.set(drawn_numbers[2])
-        self.comp_number4.set(drawn_numbers[3])
-        self.comp_number5.set(drawn_numbers[4])
+        def draw_numbers(self):
+            quantity = 0
+            drawn_numbers = []
 
-        # matching numbers
-        matching = 0
-        matching_numbers = []
-
-        for number in user_numbers:
-            for drawn_number in drawn_numbers:
-                if number == drawn_number:
-                    matching += 1
-                    matching_numbers.append(number)
+            while quantity < 5:
+                drawn_number = randint(1, 30)
+                if drawn_number not in drawn_numbers:
+                    drawn_numbers.append(drawn_number)
+                    quantity += 1
                 else:
                     continue
+    
+            self.comp_number1.set(drawn_numbers[0])
+            self.comp_number2.set(drawn_numbers[1])
+            self.comp_number3.set(drawn_numbers[2])
+            self.comp_number4.set(drawn_numbers[3])
+            self.comp_number5.set(drawn_numbers[4])
 
-        matching_label = tk.Label(self, text=f"Ilość trafień: {matching}", font="Arial 12", pady=10)
-        matching_label.grid(row=7, column=0, columnspan=5)
+            return drawn_numbers
 
-        matching_numbers_label = tk.Label(self, text=f"Trafione liczby: {matching_numbers}", font="Arial 12")
-        matching_numbers_label.grid(row=8, column=0, columnspan=5)
 
-        print(matching)
-        print(matching_numbers)
+        def verify_matching_numbers(self, user_numbers, drawn_numbers):
+            matching = 0
+            matching_numbers = []
+
+            for number in user_numbers:
+                for drawn_number in drawn_numbers:
+                    if number == drawn_number:
+                        matching += 1
+                        matching_numbers.append(number)
+                    else:
+                        continue
+
+            matching_label = tk.Label(self, text=f"Ilość trafień: {matching}", 
+                font="Arial 12", pady=10)
+            matching_label.grid(row=7, column=0, columnspan=5)
+
+            matching_numbers_label = tk.Label(self, 
+                text=f"Trafione liczby: {matching_numbers}", font="Arial 12")
+            matching_numbers_label.grid(row=8, column=0, columnspan=5)
+
+
+        user_numbers = pick_numbers(self)
+        drawn_numbers = draw_numbers(self)
+        verify_matching_numbers(self, user_numbers, drawn_numbers)
 
 
 root = tk.Tk()
